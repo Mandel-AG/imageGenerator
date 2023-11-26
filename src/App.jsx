@@ -1,9 +1,10 @@
+import {ImageGenerator} from './components/imageGenerator/ImageGenerator'
 
-function App() {
+const App = () => {
 
   return (
       <div>
-        
+        <ImageGenerator />
       </div>
       
   )
