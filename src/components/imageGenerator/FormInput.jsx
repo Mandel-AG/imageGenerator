@@ -1,7 +1,34 @@
-import React,{useState} from 'react'
+import React,{useState, useRef} from 'react'
 
 export const FormInput = () => {
   const [data, setData] = useState('');
+  const [image_url, setImage_url] = useState('/');
+  let inputRef = useRef(null)
+
+
+  const ImageGenerator = async () => {
+    if(data === ''){
+      return 0;
+    }
+    const response = await fetch(`https://api.openai.com/v1/images/generations`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization":
+        `Bearer ${import.meta.env.VITE_API_KEY_GENERATOR}`,
+        "User-Agent":"Chrome"
+      },
+      body: JSON.stringify({
+        prompt: `${data}`,
+        n: 1,
+        size: "512x512",
+    }),
+
+  });
+  let responseData = await response.json();
+  console.log(responseData)
+  }
     
     const handleChange = (e) => {   
         setData(e.target.value)
@@ -9,6 +36,7 @@ export const FormInput = () => {
     const onSubmit = (e) => {
       e.preventDefault()
       console.log(data)
+      ImageGenerator(data)
       setData('')
     }
     

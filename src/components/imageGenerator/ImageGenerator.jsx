@@ -5,7 +5,7 @@ import { FormInput } from './FormInput';
 
 export const ImageGenerator = () => {
 
-  const { data: image, loading, error } = useFetch('https://api.unsplash.com/photos/random/?client_id=YoR0S2yoj1N1zJSXkx4loS7q9Ul9n98Y73UML2wrJq0');
+  const { data: image, loading, error } = useFetch(`https://api.unsplash.com/photos/random/?client_id=${import.meta.env.VITE_API_KEY_IMAGE}`);
 
   return (
     <div>
